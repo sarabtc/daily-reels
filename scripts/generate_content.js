@@ -117,7 +117,10 @@ function postJSON(hostname, pathName, headers, body) {
 async function callGemini(count, ledger) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) return null;
-  const model = process.env.CONTENT_MODEL_GEMINI || 'gemini-2.5-flash';
+  // A moving alias on purpose. Pinned names get retired — "gemini-2.5-flash"
+  // started refusing new keys with a 404 that reads like an auth failure but is
+  // really "this model is gone". The alias always points at the current flash.
+  const model = process.env.CONTENT_MODEL_GEMINI || 'gemini-flash-latest';
   const data = await postJSON('generativelanguage.googleapis.com',
     `/v1beta/models/${model}:generateContent?key=${key}`, {}, {
       system_instruction: { parts: [{ text: systemPrompt() }] },
@@ -160,6 +163,56 @@ async function callOpenAI(count, ledger) {
     ],
   });
   return data.choices?.[0]?.message?.content || null;
+}
+
+// A model will always drift a little on cosmetics. Rejecting a whole topic
+// because a search phrase ran to six words instead of five throws away good
+// content, so the fixable things are fixed here and only the rules that
+// actually affect the finished video are left for the validator.
+const MOTIVATOR_ALIASES = {
+  social_status: 'status', social: 'status', prestige: 'status', recognition: 'status',
+  time: 'saving', time_saving: 'saving', efficiency: 'saving', savings: 'saving',
+  ease: 'simplicity', simple: 'simplicity', convenience: 'simplicity',
+  scarcity: 'opportunity', rare_opportunity: 'opportunity', fomo: 'opportunity', urgency: 'opportunity',
+  safety: 'security', certainty: 'security', trust: 'security', stability: 'security',
+  boss: 'control', power: 'control', autonomy: 'control', independence: 'control',
+  community: 'belonging', connection: 'belonging', togetherness: 'belonging',
+  frustration: 'anger', justice: 'anger', revenge: 'anger',
+  liberty: 'freedom', wealth: 'money', profit: 'money', income: 'money',
+};
+
+function tidyQuery(q) {
+  return String(q || '')
+    .replace(/[֐-׿]/g, ' ')                    // queries must be English
+    .replace(/[^A-Za-z0-9 ]/g, ' ')
+    .trim().split(/\s+/)
+    .filter((w) => w.length > 1 && !['the', 'and', 'with', 'for', 'into', 'from', 'that'].includes(w.toLowerCase()))
+    .slice(0, 4)
+    .join(' ')
+    .toLowerCase();
+}
+
+function normaliseTopic(t) {
+  if (!t || typeof t !== 'object') return t;
+
+  t.motivators = [...new Set((t.motivators || [])
+    .map((m) => String(m).toLowerCase().trim().replace(/[\s-]+/g, '_'))
+    .map((m) => MOTIVATOR_ALIASES[m] || m))]
+    .slice(0, 2);
+
+  ['hook', 'value', 'beliefShift', 'fear'].forEach((section) => {
+    if (!Array.isArray(t[section])) return;
+    t[section] = t[section].filter(Boolean).map((b) => ({
+      ...b,
+      he: String(b.he || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim(),
+      en: String(b.en || '').replace(/\s+/g, ' ').trim(),
+      query: tidyQuery(b.query),
+    }));
+  });
+
+  if (t.id) t.id = String(t.id).toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/^-|-$/g, '');
+  if (t.youtubeTitle) t.youtubeTitle = String(t.youtubeTitle).replace(/\s+/g, ' ').trim().slice(0, 95);
+  return t;
 }
 
 function parseTopics(raw) {
@@ -222,16 +275,16 @@ async function generateTopics(count) {
     }
     if (!raw) continue;
 
-    const parsed = parseTopics(raw);
+    const parsed = parseTopics(raw).map(normaliseTopic);
     const good = [];
     const bad = [];
     for (const t of parsed) {
       const problems = validateTopic(t);
       if (problems.length) bad.push({ id: t && t.id, problems }); else good.push(t);
     }
+    console.log(`  generator: ${name} returned ${parsed.length}, ${good.length} passed the rules`);
     if (bad.length) {
-      console.warn(`  generator: dropped ${bad.length} invalid topic(s)`);
-      bad.slice(0, 3).forEach((b) => console.warn(`    ${b.id}: ${b.problems[0]}`));
+      bad.slice(0, 4).forEach((b) => console.warn(`    dropped ${b.id}: ${b.problems[0]}`));
     }
     if (good.length >= count) return { topics: good.slice(0, count), source: name };
     if (good.length) {
