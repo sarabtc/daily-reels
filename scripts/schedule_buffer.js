@@ -163,11 +163,21 @@ async function hostVideo(filePath, tag) {
 
 // ------------------------------------------------------------ post scheduling
 
+// Every member of the PostActionPayload union is listed explicitly. Relying on
+// a shared `... on MutationError` fragment is not safe here: that type is not in
+// this schema, so a quota or validation failure would come back with no fields
+// set and read as a silent success.
 const MUTATION = `
   mutation CreatePost($input: CreatePostInput!) {
     createPost(input: $input) {
+      __typename
       ... on PostActionSuccess { post { id status dueAt } }
-      ... on MutationError { message }
+      ... on NotFoundError { message }
+      ... on UnauthorizedError { message }
+      ... on UnexpectedError { message }
+      ... on RestProxyError { message }
+      ... on LimitReachedError { message }
+      ... on InvalidInputError { message }
     }
   }`;
 
@@ -205,8 +215,12 @@ async function schedulePost({ channelId, service, videoUrl, caption, dueAt, topi
   if (draft) input.saveToDraft = true;
   const data = await gql(MUTATION, { input });
   const payload = data?.createPost;
-  if (payload?.message) throw new Error(payload.message);
-  return payload?.post;
+  if (!payload) throw new Error('Buffer returned an empty createPost payload');
+  if (payload.__typename !== 'PostActionSuccess') {
+    throw new Error(`${payload.__typename}: ${payload.message || 'no detail given'}`);
+  }
+  if (!payload.post?.id) throw new Error('Buffer reported success but returned no post');
+  return payload.post;
 }
 
 module.exports = { gql, listChannels, hostVideo, schedulePost };
