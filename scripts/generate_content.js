@@ -109,6 +109,29 @@ function postJSON(hostname, pathName, headers, body) {
   });
 }
 
+/**
+ * Google Gemini — the free option, and therefore the one tried first.
+ * A key from aistudio.google.com costs nothing and its free tier allows far
+ * more than the six requests a day this needs.
+ */
+async function callGemini(count, ledger) {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) return null;
+  const model = process.env.CONTENT_MODEL_GEMINI || 'gemini-2.5-flash';
+  const data = await postJSON('generativelanguage.googleapis.com',
+    `/v1beta/models/${model}:generateContent?key=${key}`, {}, {
+      system_instruction: { parts: [{ text: systemPrompt() }] },
+      contents: [{ role: 'user', parts: [{ text: userPrompt(count, ledger) }] }],
+      generationConfig: {
+        temperature: 1.1,
+        maxOutputTokens: 32000,
+        responseMimeType: 'application/json',
+      },
+    });
+  const parts = data?.candidates?.[0]?.content?.parts || [];
+  return parts.map((p) => p.text || '').join('') || null;
+}
+
 async function callAnthropic(count, ledger) {
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) return null;
@@ -184,7 +207,9 @@ function fromSeedBank(count, ledger) {
  */
 async function generateTopics(count) {
   const ledger = loadLedger();
+  // Free first, paid only as a fallback.
   const providers = [
+    ['gemini', callGemini],
     ['anthropic', callAnthropic],
     ['openai', callOpenAI],
   ];

@@ -22,6 +22,10 @@ const path = require('path');
 const https = require('https');
 const { execFileSync } = require('child_process');
 
+// Loaded here as well as in main.js, because this file is also a CLI
+// (`node scripts/schedule_buffer.js --channels`) with no other entry point.
+require('dotenv').config({ path: path.join(process.cwd(), '.env') });
+
 const GRAPHQL_HOST = 'api.buffer.com';
 
 // ---------------------------------------------------------------- Buffer API
@@ -56,14 +60,21 @@ function gql(query, variables) {
   });
 }
 
-/** Every channel on the account, with the service name Buffer uses. */
+/**
+ * Every channel on the account.
+ *
+ * Note the field is `type`, not `serviceType` — asking for the latter makes the
+ * API fail with an opaque internal fetch error rather than a validation error.
+ */
 async function listChannels() {
   const acc = await gql(`query { account { id organizations { id name } } }`);
   const orgs = acc?.account?.organizations || [];
   const out = [];
   for (const org of orgs) {
     const data = await gql(
-      `query Ch($input: ChannelsInput!) { channels(input: $input) { id name service serviceType } }`,
+      `query Ch($input: ChannelsInput!) {
+         channels(input: $input) { id name service type isDisconnected isLocked }
+       }`,
       { input: { organizationId: org.id } }
     );
     (data?.channels || []).forEach((c) => out.push({ ...c, organization: org.name, organizationId: org.id }));
@@ -179,7 +190,7 @@ function metadataFor(service, topic) {
   return {};
 }
 
-async function schedulePost({ channelId, service, videoUrl, caption, dueAt, topic }) {
+async function schedulePost({ channelId, service, videoUrl, caption, dueAt, topic, draft }) {
   const input = {
     channelId,
     text: caption,
@@ -189,6 +200,9 @@ async function schedulePost({ channelId, service, videoUrl, caption, dueAt, topi
     assets: [{ video: { url: videoUrl, metadata: { thumbnailOffset: 1200 } } }],
     metadata: metadataFor(service, topic),
   };
+  // A draft lands in Buffer for review and never publishes on its own — the
+  // safe way to prove the whole path works before anything goes out live.
+  if (draft) input.saveToDraft = true;
   const data = await gql(MUTATION, { input });
   const payload = data?.createPost;
   if (payload?.message) throw new Error(payload.message);
@@ -202,8 +216,19 @@ if (require.main === module) {
     listChannels().then((cs) => {
       if (!cs.length) return console.log('No channels found. Is BUFFER_TOKEN correct?');
       console.log('\nChannel IDs — put these in .env / GitHub secrets:\n');
-      cs.forEach((c) => console.log(`  ${c.service.padEnd(12)} ${c.id}   ${c.name}   [${c.organization}]`));
-      console.log('\n  BUFFER_CHANNEL_INSTAGRAM=...\n  BUFFER_CHANNEL_TIKTOK=...\n  BUFFER_CHANNEL_YOUTUBE=...\n');
+      cs.forEach((c) => {
+        const warn = c.isDisconnected ? '  ⚠ DISCONNECTED' : c.isLocked ? '  ⚠ LOCKED' : '';
+        console.log(`  ${c.service.padEnd(12)} ${c.id}   ${c.name}${warn}`);
+      });
+      console.log('');
+      const line = (svc, env) => {
+        const hit = cs.find((c) => c.service === svc && !c.isDisconnected);
+        if (hit) console.log(`  ${env}=${hit.id}`);
+      };
+      line('instagram', 'BUFFER_CHANNEL_INSTAGRAM');
+      line('tiktok', 'BUFFER_CHANNEL_TIKTOK');
+      line('youtube', 'BUFFER_CHANNEL_YOUTUBE');
+      console.log('');
     }).catch((e) => { console.error('ERROR', e.message); process.exit(1); });
   } else {
     console.log('Usage: node schedule_buffer.js --channels');

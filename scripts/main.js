@@ -125,6 +125,11 @@ function render(content, outDir) {
 
 async function main() {
   const dryRun = process.argv.includes('--dry-run');
+  const draft = process.argv.includes('--draft');
+  const limit = (() => {
+    const i = process.argv.indexOf('--limit');
+    return i > -1 ? parseInt(process.argv[i + 1], 10) : Infinity;
+  })();
   const today = todayInIsrael();
   const state = loadState();
 
@@ -158,10 +163,13 @@ async function main() {
   const neededCuts = new Set(dryRun ? ['instagram', 'social'] : active.map((c) => c.cut));
   const shipped = [];
 
-  for (let i = 0; i < topics.length && i < times.length; i++) {
+  const rounds = Math.min(topics.length, times.length, limit);
+  if (draft) console.log('DRAFT MODE — posts land in Buffer for review and never publish\n');
+
+  for (let i = 0; i < rounds; i++) {
     const topic = topics[i];
     const slot = times[i];
-    console.log(`\n[${i + 1}/${times.length}] ${topic.id} -> ${slot.hhmm}`);
+    console.log(`\n[${i + 1}/${rounds}] ${topic.id} -> ${slot.hhmm}`);
 
     try {
       const cuts = {};
@@ -200,8 +208,9 @@ async function main() {
             caption: captionFor(topic, ch.service),
             dueAt: slot.iso,
             topic,
+            draft,
           });
-          console.log(`  ✓ ${ch.service} scheduled ${slot.hhmm} (post ${post?.id})`);
+          console.log(`  ✓ ${ch.service} ${draft ? 'drafted' : 'scheduled ' + slot.hhmm} (post ${post?.id})`);
           ok += 1;
         } catch (e) {
           console.error(`  ✗ ${ch.service}: ${e.message}`);
@@ -219,8 +228,10 @@ async function main() {
     await sleep(1500);
   }
 
-  if (shipped.length) recordUsed(shipped);
-  if (!dryRun) saveState({ ...state, lastRunDate: today, lastShipped: shipped.length });
+  // A draft has not gone out, so it must not consume a topic — otherwise a
+  // rehearsal would silently burn content the real run was going to use.
+  if (shipped.length && !draft) recordUsed(shipped);
+  if (!dryRun && !draft) saveState({ ...state, lastRunDate: today, lastShipped: shipped.length });
 
   console.log(`\n=== ${shipped.length}/${topics.length} topics shipped ===`);
   if (shipped.length < topics.length) process.exitCode = 1;

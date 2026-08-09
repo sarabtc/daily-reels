@@ -21,6 +21,7 @@ const https = require('https');
 
 const API = 'https://pixabay.com/api/videos/';
 const MAX_BYTES = 45 * 1024 * 1024;         // skip enormous masters
+const MIN_HEIGHT = 1080;                    // enough for a 1080x1920 crop
 
 function get(url) {
   return new Promise((resolve, reject) => {
@@ -42,15 +43,27 @@ function score(hit, queryWords) {
   return queryWords.reduce((a, w) => a + (tags.includes(w) ? 1 : 0), 0);
 }
 
-/** Choose the best file variant: tallest source that is not absurdly large. */
+/**
+ * Choose the file variant to download.
+ *
+ * The output is 1080x1920 cropped from a landscape source, so anything past
+ * ~1080 lines of height is thrown away by the scaler. Pixabay serves 4K masters
+ * for many clips; downloading those would cost bandwidth and encode time for no
+ * visible gain. So: the SMALLEST variant that still has at least 1080 lines,
+ * falling back to the tallest available when nothing reaches that.
+ */
 function pickVariant(hit) {
   const vs = hit.videos || {};
-  const order = ['large', 'medium', 'small', 'tiny'];
-  const usable = order.map((k) => vs[k]).filter((v) => v && v.url);
+  const usable = ['large', 'medium', 'small', 'tiny']
+    .map((k) => vs[k])
+    .filter((v) => v && v.url && (!v.size || v.size <= MAX_BYTES));
   if (!usable.length) return null;
-  const sane = usable.filter((v) => !v.size || v.size <= MAX_BYTES);
-  const pool = sane.length ? sane : usable;
-  return pool.reduce((best, v) => ((v.height || 0) > (best.height || 0) ? v : best), pool[0]);
+
+  const enough = usable.filter((v) => (v.height || 0) >= MIN_HEIGHT);
+  if (enough.length) {
+    return enough.reduce((best, v) => ((v.height || 0) < (best.height || 0) ? v : best), enough[0]);
+  }
+  return usable.reduce((best, v) => ((v.height || 0) > (best.height || 0) ? v : best), usable[0]);
 }
 
 class ClipPool {
