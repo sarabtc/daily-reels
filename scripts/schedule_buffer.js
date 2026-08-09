@@ -200,7 +200,29 @@ function metadataFor(service, topic) {
   return {};
 }
 
-async function schedulePost({ channelId, service, videoUrl, caption, dueAt, topic, draft }) {
+// Buffer fetches the asset itself, and a freshly uploaded release asset is not
+// always readable on the first try — one channel can fail while the others
+// accept the very same URL. These are worth retrying; a bad channel id is not.
+const TRANSIENT = /could not be read|timed out|timeout|temporarily|try again|502|503|504/i;
+
+async function schedulePost(args) {
+  const attempts = args.draft ? 1 : 3;
+  let lastError;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await createPostOnce(args);
+    } catch (e) {
+      lastError = e;
+      if (i === attempts - 1 || !TRANSIENT.test(e.message)) throw e;
+      const wait = 8000 * (i + 1);
+      console.warn(`  ${args.service}: ${e.message} — retrying in ${wait / 1000}s`);
+      await new Promise((r) => setTimeout(r, wait));
+    }
+  }
+  throw lastError;
+}
+
+async function createPostOnce({ channelId, service, videoUrl, caption, dueAt, topic, draft }) {
   const input = {
     channelId,
     text: caption,
