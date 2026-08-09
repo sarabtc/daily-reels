@@ -1,0 +1,73 @@
+name: Daily Reels
+
+# Runs unattended on GitHub's machines — your computer can be off.
+# 01:00 and 01:30 UTC covers 04:00 Israel in both summer and winter time.
+# The once-a-day guard in main.js makes the second trigger a no-op.
+
+on:
+  schedule:
+    - cron: "0,30 1,2 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run even if today already ran"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write        # commit the ledger, publish the video as a release asset
+
+concurrency:
+  group: daily-reels
+  cancel-in-progress: false
+
+jobs:
+  render-and-schedule:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install ffmpeg and Hebrew-capable fonts
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Restore clip and voice cache
+        uses: actions/cache@v4
+        with:
+          path: .cache
+          key: reels-cache-${{ github.run_id }}
+          restore-keys: reels-cache-
+
+      - name: Render and schedule
+        env:
+          PIXABAY_KEY: ${{ secrets.PIXABAY_KEY }}
+          BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
+          BUFFER_CHANNEL_INSTAGRAM: ${{ secrets.BUFFER_CHANNEL_INSTAGRAM }}
+          BUFFER_CHANNEL_TIKTOK: ${{ secrets.BUFFER_CHANNEL_TIKTOK }}
+          BUFFER_CHANNEL_YOUTUBE: ${{ secrets.BUFFER_CHANNEL_YOUTUBE }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          JAMENDO_CLIENT_ID: ${{ secrets.JAMENDO_CLIENT_ID }}
+          BRAND_HANDLE: ${{ vars.BRAND_HANDLE }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FORCE_RUN: ${{ github.event.inputs.force }}
+        run: node scripts/main.js
+
+      - name: Commit the uniqueness ledger
+        if: always()
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/used_ledger.json content/state.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "Ledger update $(TZ=Asia/Jerusalem date +%Y-%m-%d)"
+          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git push || true

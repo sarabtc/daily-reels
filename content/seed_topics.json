@@ -1,0 +1,236 @@
+[
+  {
+    "id": "discipline-is-a-system",
+    "motivators": ["fear", "control"],
+    "limitingBelief": "אני פשוט לא בנוי למשמעת",
+    "empoweringBelief": "משמעת היא מערכת שכל אחד יכול לבנות",
+    "hook": [
+      { "en": "Self discipline is not about willpower at all.", "he": "משמעת עצמית היא לא כוח רצון", "query": "man alone dark room" }
+    ],
+    "value": [
+      { "en": "Willpower runs out after about three hours.", "he": "כוח רצון נגמר אחרי שלוש שעות", "query": "tired man desk evening" },
+      { "en": "So you build a system that needs none.", "he": "לכן בונים מערכת שלא דורשת כוח", "query": "gears machine working" },
+      { "en": "Start with one single habit today.", "he": "תתחילו מהרגל אחד בלבד היום", "query": "single candle lit" },
+      { "en": "Two minutes a day is already enough.", "he": "שתי דקות ביום זה מספיק", "query": "clock ticking closeup" },
+      { "en": "Put your phone in another room.", "he": "תשימו את הטלפון בחדר אחר", "query": "phone table empty" },
+      { "en": "That distance saves you dozens of decisions.", "he": "המרחק הזה חוסך עשרות החלטות", "query": "empty hallway doors" },
+      { "en": "Lay out your clothes the night before.", "he": "תכינו את הבגדים בערב לפני", "query": "clothes folded chair" },
+      { "en": "Every barrier you remove lowers resistance.", "he": "כל חסם שמסירים מוריד התנגדות", "query": "open gate path" },
+      { "en": "Mark an X on the calendar daily.", "he": "תסמנו איקס ביומן כל יום", "query": "calendar marked days" },
+      { "en": "A chain of seven days changes everything.", "he": "שרשרת של שבעה ימים משנה הכל", "query": "chain links strong" },
+      { "en": "Never break the chain twice in a row.", "he": "אל תשברו את השרשרת פעמיים", "query": "broken chain link" },
+      { "en": "Missing one day is a normal mistake.", "he": "יום אחד זה טעות רגילה", "query": "man resting bench" }
+    ],
+    "beliefShift": [
+      { "en": "You were not born without discipline.", "he": "אתם לא נולדתם בלי משמעת", "query": "newborn baby hands" },
+      { "en": "Nobody ever taught you the system.", "he": "פשוט אף אחד לא לימד אתכם", "query": "empty classroom chairs" },
+      { "en": "The right system works for you too.", "he": "מערכת נכונה עובדת גם בשבילכם", "query": "sunrise runner path" }
+    ],
+    "fear": [
+      { "en": "Imagine yourself exactly one year from now.", "he": "תדמיינו את עצמכם בעוד שנה", "query": "man looking window rain" },
+      { "en": "Same room, same screen, same excuses.", "he": "אותו חדר אותו מסך אותם תירוצים", "query": "dark room screen glow" },
+      { "en": "And that time never comes back.", "he": "והזמן הזה לא חוזר לעולם", "query": "hourglass sand falling" }
+    ],
+    "captions": {
+      "instagram": "משמעת עצמית היא לא כוח רצון. היא מערכת. תגיבו \"אני\" ואשלח לכם את המדריך המלא לפיתוח משמעת עצמית 👇",
+      "tiktok": "משמעת עצמית היא לא כוח רצון. היא מערכת שאפשר לבנות. המדריך המלא בקישור בפרופיל 👆",
+      "youtube": "משמעת עצמית היא לא כוח רצון אלא מערכת. שתים עשרה פעולות שאפשר להתחיל איתן היום. המדריך המלא בקישור בפרופיל."
+    },
+    "youtubeTitle": "משמעת עצמית היא לא כוח רצון"
+  },
+  {
+    "id": "phone-steals-two-hours",
+    "motivators": ["control", "anger"],
+    "limitingBelief": "אני חייב להיות זמין כל הזמן",
+    "empoweringBelief": "אני מחליט מתי אני זמין",
+    "hook": [
+      { "en": "Your phone steals two hours every day.", "he": "הטלפון שלכם גונב לכם שעתיים", "query": "hand holding phone night" }
+    ],
+    "value": [
+      { "en": "Every notification breaks your concentration.", "he": "כל הודעה שוברת את הריכוז", "query": "notification popup screen" },
+      { "en": "Your brain needs twenty minutes to return.", "he": "המוח צריך עשרים דקות לחזור", "query": "clock closeup minutes" },
+      { "en": "Turn off every notification today.", "he": "תכבו את כל ההתראות היום", "query": "phone settings hand" },
+      { "en": "Keep only calls from close family.", "he": "תשאירו רק שיחות ממשפחה קרובה", "query": "family together home" },
+      { "en": "Switch your screen to grey colors.", "he": "תעבירו את המסך לגווני אפור", "query": "grey abstract texture" },
+      { "en": "Strong color pulls the eye in.", "he": "צבע חזק מושך את העין", "query": "colorful lights blur" },
+      { "en": "Delete one app from your home screen.", "he": "תמחקו אפליקציה אחת ממסך הבית", "query": "finger tapping phone" },
+      { "en": "Three seconds of searching stops you.", "he": "שלוש שניות של חיפוש עוצרות אתכם", "query": "person searching thinking" },
+      { "en": "Set one screen free hour each day.", "he": "תקבעו שעה אחת ביום בלי מסך", "query": "empty desk sunlight" },
+      { "en": "Start with the first hour of morning.", "he": "תתחילו מהשעה הראשונה של הבוקר", "query": "morning window light" },
+      { "en": "Charge your phone in the kitchen.", "he": "תשימו את הטלפון להיטען במטבח", "query": "kitchen counter morning" },
+      { "en": "The distance does all the work.", "he": "המרחק עושה את כל העבודה", "query": "long empty road" }
+    ],
+    "beliefShift": [
+      { "en": "You are not addicted, you are drained.", "he": "אתם לא מכורים אתם מותשים", "query": "tired eyes closeup" },
+      { "en": "These apps were designed to steal time.", "he": "האפליקציות תוכננו לגנוב לכם זמן", "query": "code screen dark" },
+      { "en": "The moment you decide, control returns.", "he": "ברגע שתחליטו הכוח חוזר אליכם", "query": "person standing sunrise" }
+    ],
+    "fear": [
+      { "en": "Count how many hours passed this year.", "he": "תחשבו כמה שעות עברו השנה", "query": "hourglass time passing" },
+      { "en": "A thousand hours you never get back.", "he": "אלף שעות שלא תקבלו בחזרה", "query": "empty calendar pages" },
+      { "en": "And next year it will be double.", "he": "ובעוד שנה זה יהיה כפול", "query": "clock spinning fast" }
+    ],
+    "captions": {
+      "instagram": "הטלפון גונב לכם שעתיים ביום ואתם לא מרגישים. תגיבו \"אני\" ואשלח לכם את המדריך לפיתוח משמעת עצמית 👇",
+      "tiktok": "שעתיים ביום נעלמות לכם במסך. שתים עשרה פעולות שמחזירות אותן. הקישור בפרופיל 👆",
+      "youtube": "הטלפון גונב שעתיים ביום. שתים עשרה הגדרות ופעולות שמחזירות לכם את הזמן. המדריך המלא בקישור בפרופיל."
+    },
+    "youtubeTitle": "הטלפון גונב לכם שעתיים בכל יום"
+  },
+  {
+    "id": "sleep-is-the-foundation",
+    "motivators": ["saving", "security"],
+    "limitingBelief": "אני יכול להסתדר עם מעט שינה",
+    "empoweringBelief": "שינה היא הכלי הכי זול שיש לי",
+    "hook": [
+      { "en": "Too little sleep destroys your discipline.", "he": "מעט שינה הורסת את המשמעת", "query": "person tossing bed night" }
+    ],
+    "value": [
+      { "en": "After six hours the brain loses control.", "he": "אחרי שש שעות המוח מאבד שליטה", "query": "brain scan abstract" },
+      { "en": "You feel fine but you are not.", "he": "אתם מרגישים בסדר אבל אתם לא", "query": "tired man mirror" },
+      { "en": "Go to sleep at the same time.", "he": "תלכו לישון באותה שעה כל לילה", "query": "bedroom night lamp" },
+      { "en": "Your body loves a fixed hour.", "he": "הגוף אוהב שעה קבועה מאוד", "query": "alarm clock bedside" },
+      { "en": "Turn off screens one hour before bed.", "he": "תכבו מסכים שעה לפני השינה", "query": "dark bedroom window" },
+      { "en": "Blue light stops your sleep hormone.", "he": "אור כחול עוצר את השינה", "query": "blue light glow" },
+      { "en": "Lower the temperature in your room.", "he": "תורידו את הטמפרטורה בחדר קצת", "query": "cool bedroom curtains" },
+      { "en": "A cool room shortens falling asleep.", "he": "חדר קריר מקצר את ההירדמות", "query": "open window breeze" },
+      { "en": "No coffee after two in the afternoon.", "he": "בלי קפה אחרי שתיים בצהריים", "query": "coffee cup afternoon" },
+      { "en": "Caffeine stays in your body six hours.", "he": "קפאין נשאר בגוף שש שעות", "query": "coffee beans closeup" },
+      { "en": "Write your thoughts down before bed.", "he": "תכתבו את המחשבות לפני השינה", "query": "notebook pen bedside" },
+      { "en": "An empty head falls asleep faster.", "he": "ראש ריק נרדם הרבה יותר מהר", "query": "peaceful sleeping person" }
+    ],
+    "beliefShift": [
+      { "en": "Sleep is not wasted time.", "he": "שינה היא לא בזבוז זמן", "query": "sunrise calm morning" },
+      { "en": "It is the cheapest investment there is.", "he": "היא ההשקעה הכי זולה שיש", "query": "coins stacked growing" },
+      { "en": "One good night is worth a day.", "he": "לילה טוב שווה יום שלם", "query": "energetic morning person" }
+    ],
+    "fear": [
+      { "en": "Imagine five more years of exhaustion.", "he": "עוד חמש שנים של עייפות", "query": "exhausted man office" },
+      { "en": "You will miss chances without noticing.", "he": "תפספסו הזדמנויות בלי לשים לב", "query": "door closing slowly" },
+      { "en": "And your body will send the bill.", "he": "והגוף ישלח את החשבון בסוף", "query": "hospital corridor empty" }
+    ],
+    "captions": {
+      "instagram": "אי אפשר לבנות משמעת על שש שעות שינה. תגיבו \"אני\" ואשלח לכם את המדריך לפיתוח משמעת עצמית 👇",
+      "tiktok": "שינה היא הבסיס של כל משמעת. שתים עשרה פעולות פשוטות ללילה טוב. הקישור בפרופיל 👆",
+      "youtube": "מעט שינה הורסת משמעת עצמית. שתים עשרה פעולות שמשפרות את הלילה שלכם. המדריך המלא בקישור בפרופיל."
+    },
+    "youtubeTitle": "מעט שינה הורסת לכם את המשמעת"
+  },
+  {
+    "id": "comparison-steals-progress",
+    "motivators": ["anger", "freedom"],
+    "limitingBelief": "כולם מצליחים יותר ממני",
+    "empoweringBelief": "אני מודד את עצמי רק מול אתמול",
+    "hook": [
+      { "en": "You only see their final result.", "he": "אתם רואים רק את הסוף שלהם", "query": "trophy spotlight stage" }
+    ],
+    "value": [
+      { "en": "Nobody films their own failures.", "he": "אף אחד לא מצלם את הכישלונות", "query": "camera filming person" },
+      { "en": "You compare your start to their end.", "he": "אתם משווים התחלה מול סוף", "query": "race start line" },
+      { "en": "Stop following five accounts today.", "he": "תפסיקו לעקוב אחרי חמישה חשבונות", "query": "phone scrolling feed" },
+      { "en": "Choose the ones that make you feel bad.", "he": "תבחרו את אלה שגורמים לכם רע", "query": "sad person phone" },
+      { "en": "Write three things that improved this month.", "he": "תכתבו שלושה דברים שהשתפרו החודש", "query": "writing journal desk" },
+      { "en": "The only measure is against yesterday.", "he": "המדידה היחידה היא מול אתמול", "query": "mirror reflection person" },
+      { "en": "Film yourself once every week.", "he": "תצלמו את עצמכם פעם בשבוע", "query": "person recording video" },
+      { "en": "In one month you see the difference.", "he": "בעוד חודש תראו את ההבדל", "query": "before after transformation" },
+      { "en": "Follow two people who actually teach you.", "he": "תעקבו אחרי שניים שמלמדים אתכם", "query": "teacher explaining student" },
+      { "en": "Mute the rest without any guilt.", "he": "תבטלו את השאר בלי אשמה", "query": "person deleting phone" },
+      { "en": "Your screen decides your mood.", "he": "המסך שלכם קובע את מצב הרוח", "query": "face lit screen" },
+      { "en": "Clean it like you clean a house.", "he": "תנקו אותו כמו שמנקים בית", "query": "cleaning tidy room" }
+    ],
+    "beliefShift": [
+      { "en": "You are not behind, you are moving.", "he": "אתם לא מאחור אתם בדרך", "query": "person walking forward" },
+      { "en": "Everyone moves at a different pace.", "he": "לכל אחד יש קצב אחר לגמרי", "query": "runners different speeds" },
+      { "en": "Your own pace is the only one.", "he": "הקצב שלכם הוא היחיד שחשוב", "query": "solo runner sunrise" }
+    ],
+    "fear": [
+      { "en": "Another year of draining comparisons.", "he": "עוד שנה של השוואות מתישות", "query": "tired person crowd" },
+      { "en": "You will forget what you wanted.", "he": "תשכחו מה בכלל רציתם בעצמכם", "query": "blurred faded photo" },
+      { "en": "And the dream stays someone else's.", "he": "והחלום יישאר של מישהו אחר", "query": "empty stage lights" }
+    ],
+    "captions": {
+      "instagram": "אתם משווים את ההתחלה שלכם לסוף של אחרים. תגיבו \"אני\" ואשלח לכם את המדריך לפיתוח משמעת עצמית 👇",
+      "tiktok": "ההשוואה גונבת לכם את ההתקדמות. שתים עשרה פעולות שעוצרות אותה. הקישור בפרופיל 👆",
+      "youtube": "השוואה לאחרים הורסת התקדמות. שתים עשרה פעולות שמחזירות לכם את המדידה הנכונה. המדריך המלא בקישור בפרופיל."
+    },
+    "youtubeTitle": "אתם רואים רק את הסוף שלהם"
+  },
+  {
+    "id": "money-is-daily-control",
+    "motivators": ["money", "saving"],
+    "limitingBelief": "אין לי מספיק כסף כדי לחסוך",
+    "empoweringBelief": "כל שקל שאני שולט בו הוא כוח",
+    "hook": [
+      { "en": "Your money disappears without you noticing.", "he": "הכסף שלכם נעלם בלי שתשימו לב", "query": "wallet empty hands" }
+    ],
+    "value": [
+      { "en": "Write every expense for seven days.", "he": "תכתבו כל הוצאה שבעה ימים", "query": "receipt paper writing" },
+      { "en": "Writing alone cuts about ten percent.", "he": "רק הכתיבה מורידה עשרה אחוז", "query": "calculator notebook desk" },
+      { "en": "Check all your monthly subscriptions.", "he": "תבדקו את המנויים החודשיים שלכם", "query": "credit card laptop" },
+      { "en": "Most of you pay for three useless ones.", "he": "רובכם משלמים על שלושה מיותרים", "query": "phone apps screen" },
+      { "en": "Move one hundred shekels on payday.", "he": "תעבירו מאה שקל ביום המשכורת", "query": "bank transfer phone" },
+      { "en": "What you do not see you do not spend.", "he": "מה שלא רואים לא מוציאים", "query": "safe locked box" },
+      { "en": "Wait two days before any purchase.", "he": "תחכו יומיים לפני כל קנייה", "query": "shopping cart waiting" },
+      { "en": "Most of the urge disappears after a day.", "he": "רוב הרצון נעלם אחרי יום", "query": "store window shopping" },
+      { "en": "Pay with cash for one month.", "he": "תשלמו במזומן בחודש הקרוב", "query": "cash money hands" },
+      { "en": "Your hand feels what leaves you.", "he": "היד מרגישה את מה שיוצא", "query": "counting bills hands" },
+      { "en": "Raise your saving by one percent.", "he": "תגדילו את החיסכון באחוז אחד", "query": "growing plant coins" },
+      { "en": "One percent a month becomes years.", "he": "אחוז אחד בחודש זה שנים", "query": "chart growing upward" }
+    ],
+    "beliefShift": [
+      { "en": "Saving is not about the amount.", "he": "חיסכון הוא לא עניין של סכום", "query": "small coin jar" },
+      { "en": "It is about daily control.", "he": "הוא עניין של שליטה יומית", "query": "hand steering wheel" },
+      { "en": "Who controls one shekel controls a thousand.", "he": "מי ששולט בשקל שולט באלף", "query": "stacked coins tower" }
+    ],
+    "fear": [
+      { "en": "Imagine yourself at age fifty.", "he": "תדמיינו את עצמכם בגיל חמישים", "query": "older man thinking window" },
+      { "en": "Same salary and the same debts.", "he": "אותה משכורת ואותם חובות בדיוק", "query": "bills paperwork table" },
+      { "en": "And your children watch all of it.", "he": "והילדים רואים בדיוק את זה", "query": "child watching parent" }
+    ],
+    "captions": {
+      "instagram": "חיסכון הוא לא עניין של סכום אלא של שליטה יומית. תגיבו \"אני\" ואשלח לכם את המדריך לפיתוח משמעת עצמית 👇",
+      "tiktok": "הכסף נעלם בלי שתשימו לב. שתים עשרה פעולות שעוצרות את זה. הקישור בפרופיל 👆",
+      "youtube": "הכסף נעלם בלי שתשימו לב. שתים עשרה פעולות פשוטות לשליטה יומית בכסף. המדריך המלא בקישור בפרופיל."
+    },
+    "youtubeTitle": "הכסף נעלם לכם בלי שתשימו לב"
+  },
+  {
+    "id": "environment-does-half-the-work",
+    "motivators": ["belonging", "status"],
+    "limitingBelief": "אני חייב לעשות את זה לבד",
+    "empoweringBelief": "הסביבה שלי עושה חצי מהעבודה",
+    "hook": [
+      { "en": "You are the average of five friends.", "he": "אתם הממוצע של חמשת חבריכם", "query": "group friends walking" }
+    ],
+    "value": [
+      { "en": "Check who you speak with every day.", "he": "תבדקו עם מי אתם מדברים יומיום", "query": "two people talking cafe" },
+      { "en": "Write those five names down now.", "he": "תכתבו את חמשת השמות האלה", "query": "list names paper" },
+      { "en": "Ask where each of them is going.", "he": "תשאלו לאן כל אחד מהם הולך", "query": "crossroads signpost" },
+      { "en": "Add one person ahead of you.", "he": "תוסיפו אדם אחד שקדימה מכם", "query": "mentor teaching young" },
+      { "en": "One call a week already changes things.", "he": "שיחה אחת בשבוע כבר משנה", "query": "phone call window" },
+      { "en": "Tell one person about your goal.", "he": "תספרו למישהו אחד על המטרה", "query": "two friends conversation" },
+      { "en": "Those who say it out loud finish more.", "he": "מי שמספר בקול מסיים יותר", "query": "person speaking microphone" },
+      { "en": "Set a fixed report once a week.", "he": "תקבעו דיווח קבוע פעם בשבוע", "query": "calendar weekly meeting" },
+      { "en": "Small shame beats big motivation.", "he": "בושה קטנה חזקה ממוטיבציה גדולה", "query": "accountability meeting group" },
+      { "en": "Find a group that already does it.", "he": "תמצאו קבוצה שעושה את זה", "query": "team working together" },
+      { "en": "Alone is slow and together is fast.", "he": "לבד זה איטי וביחד מהיר", "query": "rowing team synchronized" },
+      { "en": "You do not need more willpower.", "he": "אתם לא צריכים עוד כוח רצון", "query": "person resting relief" }
+    ],
+    "beliefShift": [
+      { "en": "Doing it alone is not strength.", "he": "לבד זה לא סימן לחוזק", "query": "lone figure desert" },
+      { "en": "Strong people build the right environment.", "he": "החזקים בונים לעצמם סביבה נכונה", "query": "building construction team" },
+      { "en": "Your environment does half the work.", "he": "הסביבה עושה חצי מהעבודה בשבילכם", "query": "supportive group circle" }
+    ],
+    "fear": [
+      { "en": "You will stay alone with the same thoughts.", "he": "תישארו לבד עם אותן מחשבות", "query": "empty room chair" },
+      { "en": "And nobody will ask what happened.", "he": "ואף אחד לא ישאל מה קרה", "query": "silent empty street" },
+      { "en": "In five years this becomes permanent.", "he": "בעוד חמש שנים זה מתקבע", "query": "locked door chain" }
+    ],
+    "captions": {
+      "instagram": "אתם לא צריכים עוד כוח רצון. אתם צריכים סביבה אחרת. תגיבו \"אני\" ואשלח לכם את המדריך לפיתוח משמעת עצמית 👇",
+      "tiktok": "הסביבה עושה חצי מהעבודה. שתים עשרה פעולות שבונות אותה. הקישור בפרופיל 👆",
+      "youtube": "הסביבה שלכם עושה חצי מהעבודה. שתים עשרה פעולות לבניית סביבה שמושכת אתכם קדימה. המדריך המלא בקישור בפרופיל."
+    },
+    "youtubeTitle": "אתם הממוצע של חמשת חבריכם"
+  }
+]

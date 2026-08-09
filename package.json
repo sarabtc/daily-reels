@@ -1,0 +1,25 @@
+{
+  "name": "daily-reels",
+  "version": "2.0.0",
+  "private": true,
+  "type": "commonjs",
+  "description": "Six unique Hebrew-subtitled reels a day, scheduled to Instagram, TikTok and YouTube Shorts via Buffer.",
+  "scripts": {
+    "channels": "node scripts/schedule_buffer.js --channels",
+    "generate": "node scripts/generate_content.js --count 6",
+    "validate": "node scripts/validate_content.js content/seed_topics.json",
+    "dry-run": "node scripts/main.js --dry-run",
+    "run": "node scripts/main.js",
+    "force": "FORCE_RUN=true node scripts/main.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "msedge-tts": "^2.0.6"
+  },
+  "optionalDependencies": {
+    "ffmpeg-static": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
