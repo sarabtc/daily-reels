@@ -68,18 +68,38 @@ function israelToUTC(dateStr, hhmm) {
   return new Date(guess).toISOString();
 }
 
-/** Slot times for today, rolled to tomorrow if the moment has already passed. */
+function addDays(dateStr, n) {
+  const d = new Date(`${dateStr}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+
+/**
+ * Slot times for `dateStr`. A slot already in the past rolls to the next day, so
+ * a mid-day forced run never asks Buffer for a time that has been and gone.
+ */
 function slotTimes(dateStr) {
   const now = Date.now();
   return SLOTS.map((hhmm) => {
     let iso = israelToUTC(dateStr, hhmm);
     if (new Date(iso).getTime() <= now + 120000) {
-      const next = new Date(`${dateStr}T00:00:00Z`);
-      next.setUTCDate(next.getUTCDate() + 1);
-      iso = israelToUTC(next.toISOString().slice(0, 10), hhmm);
+      iso = israelToUTC(addDays(dateStr, 1), hhmm);
     }
     return { hhmm, iso };
   });
+}
+
+/**
+ * Which day to fill. Defaults to today; SCHEDULE_DATE=YYYY-MM-DD or
+ * SCHEDULE_DATE=tomorrow targets a specific day, which is what you want when
+ * setting up mid-afternoon and the first post should be tomorrow at 07:45.
+ */
+function targetDate(today) {
+  const raw = (process.env.SCHEDULE_DATE || '').trim();
+  if (!raw) return today;
+  if (raw === 'tomorrow') return addDays(today, 1);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+  throw new Error(`SCHEDULE_DATE must be YYYY-MM-DD or "tomorrow", got "${raw}"`);
 }
 
 function loadState() {
@@ -132,7 +152,9 @@ async function main() {
   if (!topics.length) throw new Error('no topics available');
   console.log(`Topics: ${topics.length} from ${source}\n`);
 
-  const times = slotTimes(today);
+  const forDay = targetDate(today);
+  const times = slotTimes(forDay);
+  if (forDay !== today) console.log(`Filling ${forDay} (SCHEDULE_DATE)`);
   const neededCuts = new Set(dryRun ? ['instagram', 'social'] : active.map((c) => c.cut));
   const shipped = [];
 
