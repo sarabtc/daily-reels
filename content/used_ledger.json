@@ -226,5 +226,23 @@
     "hook": "משמעת עצמית היא לא כוח רצון",
     "limitingBelief": "אני פשוט לא בנוי למשמעת",
     "date": "2026-08-17"
+  },
+  {
+    "id": "discipline-is-a-system",
+    "hook": "משמעת עצמית היא לא כוח רצון",
+    "limitingBelief": "אני פשוט לא בנוי למשמעת",
+    "date": "2026-08-18"
+  },
+  {
+    "id": "phone-steals-two-hours",
+    "hook": "הטלפון שלכם גונב לכם שעתיים",
+    "limitingBelief": "אני חייב להיות זמין כל הזמן",
+    "date": "2026-08-18"
+  },
+  {
+    "id": "sleep-is-the-foundation",
+    "hook": "מעט שינה הורסת את המשמעת",
+    "limitingBelief": "אני יכול להסתדר עם מעט שינה",
+    "date": "2026-08-18"
   }
 ]
