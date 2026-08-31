@@ -442,5 +442,29 @@
     "hook": "אתם רואים רק את הסוף שלהם",
     "limitingBelief": "כולם מצליחים יותר ממני",
     "date": "2026-08-30"
+  },
+  {
+    "id": "discipline-is-a-system",
+    "hook": "משמעת עצמית היא לא כוח רצון",
+    "limitingBelief": "אני פשוט לא בנוי למשמעת",
+    "date": "2026-08-31"
+  },
+  {
+    "id": "phone-steals-two-hours",
+    "hook": "הטלפון שלכם גונב לכם שעתיים",
+    "limitingBelief": "אני חייב להיות זמין כל הזמן",
+    "date": "2026-08-31"
+  },
+  {
+    "id": "money-is-daily-control",
+    "hook": "הכסף שלכם נעלם בלי שתשימו לב",
+    "limitingBelief": "אין לי מספיק כסף כדי לחסוך",
+    "date": "2026-08-31"
+  },
+  {
+    "id": "environment-does-half-the-work",
+    "hook": "אתם הממוצע של חמשת חבריכם",
+    "limitingBelief": "אני חייב לעשות את זה לבד",
+    "date": "2026-08-31"
   }
 ]
