@@ -1732,5 +1732,29 @@
     "hook": "אתם הממוצע של חמשת חבריכם",
     "limitingBelief": "אני חייב לעשות את זה לבד",
     "date": "2026-11-08"
+  },
+  {
+    "id": "phone-steals-two-hours",
+    "hook": "הטלפון שלכם גונב לכם שעתיים",
+    "limitingBelief": "אני חייב להיות זמין כל הזמן",
+    "date": "2026-11-09"
+  },
+  {
+    "id": "sleep-is-the-foundation",
+    "hook": "מעט שינה הורסת את המשמעת",
+    "limitingBelief": "אני יכול להסתדר עם מעט שינה",
+    "date": "2026-11-09"
+  },
+  {
+    "id": "money-is-daily-control",
+    "hook": "הכסף שלכם נעלם בלי שתשימו לב",
+    "limitingBelief": "אין לי מספיק כסף כדי לחסוך",
+    "date": "2026-11-09"
+  },
+  {
+    "id": "environment-does-half-the-work",
+    "hook": "אתם הממוצע של חמשת חבריכם",
+    "limitingBelief": "אני חייב לעשות את זה לבד",
+    "date": "2026-11-09"
   }
 ]
